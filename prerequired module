@@ -1,0 +1,41 @@
+Separate — required modules & notes
+Standard library modules (no install needed)
+
+argparse — CLI parsing
+
+socket — TCP connect + banner grabbing
+
+concurrent.futures — ThreadPoolExecutor for parallel scanning
+
+ipaddress — parse CIDR networks
+
+time, sys — utility functions
+
+Optional / external modules (install if you want ARP discovery)
+
+scapy — for ARP-based local host discovery.
+
+Install: pip install scapy (or pip3 install scapy)
+
+Run ARP discovery as root/administrator (e.g., sudo python3 network_scanner.py --cidr 192.168.1.0/24) because scapy uses raw sockets / packet send.
+
+Quick install commands
+
+If you only need the basic scanner (no ARP): nothing to install.
+
+If you want ARP discovery:
+
+pip3 install scapy
+
+On many systems you must run the script with sudo (Linux/macOS) or Administrator privileges (Windows).
+
+Short usage examples
+
+Scan local network (requires scapy + root):
+sudo python3 network_scanner.py --cidr 192.168.1.0/24 --ports 22,80,443
+
+Scan single host for common ports:
+python3 network_scanner.py --host 10.0.0.5 --ports 1-1024
+
+Faster scanning with more threads (be careful — noise):
+python3 network_scanner.py --host 10.0.0.5 --ports 1-1024 --workers 400 --timeout 0.5
